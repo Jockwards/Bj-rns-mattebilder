@@ -1,5 +1,5 @@
 name = "bjorns-mattebilder"
-compatibility_date = "2024-09-25"
-assets = {
-  directory = "dist"
-}
+compatibility_date = "2025-08-26"
+
+[assets]
+directory = "./dist/"
