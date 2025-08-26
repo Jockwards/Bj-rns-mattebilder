@@ -1,11 +1,5 @@
-# This is the name of your Cloudflare Pages project.
-# It has been changed to be lowercase and contain only alphanumeric characters and dashes.
 name = "bjorns-mattebilder"
-
-# This is a compatibility date to ensure the latest features are used.
-# It is a good practice to use the current date.
-compatibility_date = "2025-08-26"
-
-# This specifies that you are deploying a static site.
-[site]
-bucket = "./dist"
+compatibility_date = "2024-09-25"
+assets = {
+  directory = "dist"
+}
