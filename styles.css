@@ -1,0 +1,37 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height:1.6; background:#f5f5f0; min-height:100vh; color:#222; background-image:repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0, rgba(0,0,0,0.015) 1px, transparent 1px, transparent 24px), repeating-linear-gradient(90deg, rgba(0,0,0,0.01) 0, rgba(0,0,0,0.01) 1px, transparent 1px, transparent 24px); background-size:25px 25px; }
+.container { max-width:1100px; margin:0 auto; padding:30px 25px 60px; }
+header.site-header { text-align:center; margin-bottom:25px; position:relative; }
+.header-image { max-width:260px; width:40%; height:auto; filter:grayscale(100%) contrast(1.1); mix-blend-mode:multiply; margin-bottom:10px; image-rendering:-webkit-optimize-contrast; }
+.title-hand { font-size:2.8rem; font-family:"Courier New", monospace; font-weight:700; letter-spacing:1px; color:#111; text-shadow:1px 1px 0 #fff; }
+.tagline { font-size:1.05rem; font-style:italic; color:#333; opacity:.85; }
+main { background:transparent; padding:0; }
+.panel-paper { background:#fff; border:2px solid #000; box-shadow:4px 4px 0 #000; border-radius:6px; position:relative; margin-bottom:28px; padding:24px 22px 28px; }
+.panel-paper:before { content:""; position:absolute; inset:0; background:repeating-linear-gradient(0deg, transparent 0 22px, rgba(0,0,0,0.03) 22px 23px); pointer-events:none; border-radius:4px; }
+.input-section h2, .syntax-help h3, .examples h3, .preview-section h2 { color:#111; font-family:"Courier New", monospace; margin-bottom:15px; }
+#mathInput { width:100%; padding:14px 14px 16px; border:2px solid #000; border-radius:4px; font-size:16px; font-family:'Courier New', monospace; resize:vertical; transition:box-shadow .2s ease; background:#fafafa; box-shadow:inset 2px 2px 0 #000; }
+#mathInput:focus { outline:none; box-shadow:inset 2px 2px 0 #000, 0 0 0 2px #000; }
+.controls { display:flex; gap:8px; margin-top:15px; flex-wrap:wrap; }
+button { background:#fff; color:#000; border:2px solid #000; padding:10px 18px; border-radius:5px; cursor:pointer; font-size:14px; font-weight:600; transition:transform .15s ease, box-shadow .15s ease, background-color .2s ease; box-shadow:3px 3px 0 #000; font-family:'Courier New', monospace; }
+button.btn-render { background: linear-gradient(135deg,#e8f9e8,#d4f1d4); border-color:#0f600f; box-shadow:3px 3px 0 #0f600f; }
+button.btn-render:hover:not(:disabled) { background: linear-gradient(135deg,#dcf4dc,#c5eac5); box-shadow:5px 5px 0 #0f600f; }
+button.btn-render:active:not(:disabled) { box-shadow:2px 2px 0 #0f600f; }
+button:hover:not(:disabled) { transform:translate(-2px,-2px); box-shadow:5px 5px 0 #000; }
+button:active:not(:disabled) { transform:translate(0,0); box-shadow:2px 2px 0 #000; }
+button:disabled { opacity:.4; cursor:not-allowed; box-shadow:3px 3px 0 #000; }
+.syntax-help { background:#fff; padding:18px 18px 25px; border-radius:6px; margin-bottom:28px; }
+.syntax-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:8px; }
+.syntax-item { background:#fafafa; padding:8px 10px; border-radius:4px; border:1px dashed #000; font-size:13px; position:relative; }
+.syntax-item strong { color:#000; }
+.preview-section { margin-bottom:30px; }
+.math-preview { min-height:110px; background:#fff; border:2px solid #000; border-radius:6px; display:flex; align-items:center; justify-content:center; padding:28px 26px; font-size:18px; color:#444; text-align:center; box-shadow:4px 4px 0 #000; position:relative; }
+.math-preview:before { content:""; position:absolute; inset:0; background:repeating-linear-gradient(0deg, transparent 0 24px, rgba(0,0,0,0.03) 24px 25px); border-radius:4px; pointer-events:none; }
+.math-preview.has-content { color:#111; }
+.examples { background:#fff; padding:18px 18px 24px; border-radius:6px; }
+.example-buttons { display:flex; flex-wrap:wrap; gap:8px; }
+.example-btn { background:#fff; font-size:12px; padding:6px 10px; }
+.example-btn:hover { transform:translate(-1px,-1px); }
+.math-preview mjx-container { font-size:22px; }
+@media (max-width:768px) { .container{padding:15px;} .title-hand{font-size:2.2rem;} .panel-paper{padding:18px 16px 24px;} button{width:100%;} .controls{flex-direction:column;} .syntax-grid{grid-template-columns:1fr;} }
+.loading { display:inline-block; width:18px; height:18px; border:2px solid #000; border-top:2px solid transparent; border-radius:50%; animation:spin .8s linear infinite; margin-right:8px; }
+@keyframes spin { 0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);} }
