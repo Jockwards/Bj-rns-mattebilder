@@ -3,7 +3,6 @@ class Math2Pic {
         this.mathInput    = document.getElementById('mathInput');
         this.mathPreview  = document.getElementById('mathPreview');
         this.downloadBtn  = document.getElementById('downloadBtn');
-        this.downloadJpgBtn = document.getElementById('downloadJpgBtn');
         this.copyBtn      = document.getElementById('copyBtn');
         this.transparentBg = document.getElementById('transparentBg');
         this.exampleBtns  = document.querySelectorAll('.example-btn');
@@ -16,7 +15,6 @@ class Math2Pic {
 
     initEventListeners() {
         this.downloadBtn.addEventListener('click', () => this.downloadImage('png'));
-        this.downloadJpgBtn.addEventListener('click', () => this.downloadImage('jpg'));
         this.copyBtn.addEventListener('click', () => this.copyToClipboard());
 
         // Size selector
@@ -104,7 +102,7 @@ class Math2Pic {
 
     async renderMath() {
         const input = this.mathInput.value.trim();
-        const dlBtns = [this.downloadBtn, this.downloadJpgBtn];
+        const dlBtns = [this.downloadBtn];
 
         // Copy button works from raw input — enable as soon as there's text
         this.copyBtn.disabled = !input;
