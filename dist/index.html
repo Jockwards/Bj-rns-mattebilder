@@ -6,18 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Björns mattebilder - Konvertera matematik till bilder</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            macros: {
+                'infinity': '\\infty',
+                'integral': '\\int',
+                'sum': '\\sum',
+                'lim': '\\lim'
+            }
+        },
+        svg: { fontCache: 'none', scale: 1.2 }
+    };
+    </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 
 <body>
     <div class="container sketch-theme">
-        <header class="site-header">
-            <img src="header_image.png" alt="Header" class="header-image" />
-            <h1 class="title-hand">Björns mattebilder</h1>
-            <p class="tagline">Konvertera matematiska ekvationer till nedladdningsbara bilder med enkla
-                tangentbordssymboler</p>
-        </header>
+        <div class="page-hero">
+            <header class="site-header">
+                <h1 class="title-hand">Björns mattebilder</h1>
+                <p class="tagline">Konvertera matematiska ekvationer till nedladdningsbara bilder med enkla
+                    tangentbordssymboler</p>
+            </header>
+            <div class="bear-peek-wrapper">
+                <img src="header_image.svg" alt="Björn med matematikverktyg" class="header-image" />
+            </div>
+        </div>
 
         <main>
             <div class="input-section panel-paper">
@@ -25,11 +45,61 @@
                 <textarea id="mathInput" placeholder="Skriv din matematiska ekvation här... t.ex. x^2 + 2*x + 1 = 0"
                     rows="4"></textarea>
 
+                <details class="symbol-panel">
+                    <summary class="symbol-toggle">▾ Infoga symbol</summary>
+                    <div class="symbol-groups">
+                        <div class="symbol-group">
+                            <span class="symbol-group-label">Grekiska</span>
+                            <button class="symbol-btn" data-insert="alpha">α</button>
+                            <button class="symbol-btn" data-insert="beta">β</button>
+                            <button class="symbol-btn" data-insert="gamma">γ</button>
+                            <button class="symbol-btn" data-insert="delta">δ</button>
+                            <button class="symbol-btn" data-insert="pi">π</button>
+                            <button class="symbol-btn" data-insert="theta">θ</button>
+                            <button class="symbol-btn" data-insert="lambda">λ</button>
+                            <button class="symbol-btn" data-insert="sigma">σ</button>
+                            <button class="symbol-btn" data-insert="omega">ω</button>
+                            <button class="symbol-btn" data-insert="phi">φ</button>
+                        </div>
+                        <div class="symbol-group">
+                            <span class="symbol-group-label">Operatorer</span>
+                            <button class="symbol-btn" data-insert="sqrt()">√</button>
+                            <button class="symbol-btn" data-insert="approx">≈</button>
+                            <button class="symbol-btn" data-insert="+/-">±</button>
+                            <button class="symbol-btn" data-insert="<=">≤</button>
+                            <button class="symbol-btn" data-insert=">=">≥</button>
+                            <button class="symbol-btn" data-insert="!=">≠</button>
+                            <button class="symbol-btn" data-insert="->">→</button>
+                            <button class="symbol-btn" data-insert="*">×</button>
+                            <button class="symbol-btn" data-insert="/">÷</button>
+                            <button class="symbol-btn" data-insert="%">%</button>
+                            <button class="symbol-btn" data-insert="infinity">∞</button>
+                            <button class="symbol-btn" data-insert="integral">∫</button>
+                            <button class="symbol-btn" data-insert="sum">Σ</button>
+                            <button class="symbol-btn" data-insert="lim">lim</button>
+                        </div>
+                        <div class="symbol-group">
+                            <span class="symbol-group-label">Geometri</span>
+                            <button class="symbol-btn" data-insert="^{\circ}">°</button>
+                            <button class="symbol-btn" data-insert="angle">∠</button>
+                            <button class="symbol-btn" data-insert="| |">|x|</button>
+                        </div>
+                        <div class="symbol-group">
+                            <span class="symbol-group-label">Potenser / bråk</span>
+                            <button class="symbol-btn" data-insert="^2">x²</button>
+                            <button class="symbol-btn" data-insert="^3">x³</button>
+                            <button class="symbol-btn" data-insert="^{}">xⁿ</button>
+                            <button class="symbol-btn" data-insert="_{}">xₙ</button>
+                            <button class="symbol-btn" data-insert="()/()">(a)/(b)</button>
+                        </div>
+                    </div>
+                </details>
+
                 <div class="controls">
-                    <button id="renderBtn" class="btn-render" title="Ctrl+Enter för att rendera">Rendera
-                        ekvation</button>
                     <button id="downloadBtn" disabled>Ladda ner som PNG</button>
                     <button id="downloadJpgBtn" disabled>Ladda ner som JPG</button>
+                    <button id="copyBtn" disabled>Kopiera till urklipp som text*</button>
+                    <span class="copy-footnote">*vissa tecken kan inte kopieras som text, t.ex. bråk</span>
                 </div>
             </div>
             <div class="preview-section panel-paper">
@@ -42,28 +112,40 @@
                 <h3>Syntaxhjälp</h3>
                 <div class="syntax-grid">
                     <div class="syntax-item">
-                        <strong>Upphöjt (Potens):</strong> x^2 → x²
+                        <strong>Potens:</strong> x^2 → x²,&nbsp; x^{10} → x¹⁰
                     </div>
                     <div class="syntax-item">
-                        <strong>Nedsänkt:</strong> x_1 → x₁
+                        <strong>Nedsänkt:</strong> x_1 → x₁,&nbsp; x_{12} → x₁₂
                     </div>
                     <div class="syntax-item">
-                        <strong>Bråk:</strong> a/b → a/b eller (x+1)/(x-1)
+                        <strong>Bråk:</strong> (x+1)/(x-1) → bråkstreck
                     </div>
                     <div class="syntax-item">
                         <strong>Kvadratrot:</strong> sqrt(x) → √x
                     </div>
                     <div class="syntax-item">
-                        <strong>Multiplikation:</strong> 2*x eller 2x → 2x
+                        <strong>Multiplikation:</strong> 2*x → 2·x
                     </div>
                     <div class="syntax-item">
-                        <strong>Grekiska bokstäver:</strong> alpha, beta, gamma, pi, osv.
+                        <strong>Ungefär lika:</strong> approx → ≈
                     </div>
                     <div class="syntax-item">
-                        <strong>Funktioner:</strong> sin(x), cos(x), log(x), ln(x)
+                        <strong>Grader:</strong> 90^{\circ} → 90°
                     </div>
                     <div class="syntax-item">
-                        <strong>Oändlighet:</strong> infinity → ∞
+                        <strong>Vinkel:</strong> angle → ∠
+                    </div>
+                    <div class="syntax-item">
+                        <strong>Negativa tal:</strong> -x, -(x+1)
+                    </div>
+                    <div class="syntax-item">
+                        <strong>Gruppering:</strong> (2+3)*4 → (2+3)·4
+                    </div>
+                    <div class="syntax-item">
+                        <strong>Funktioner:</strong> sin(x), cos(x), tan(x), log(x)
+                    </div>
+                    <div class="syntax-item">
+                        <strong>Grekiska bokstäver:</strong> alpha, beta, pi, theta, osv.
                     </div>
                 </div>
             </div>
@@ -73,12 +155,18 @@
             <div class="examples panel-paper">
                 <h3>Exempel</h3>
                 <div class="example-buttons">
-                    <button class="example-btn" data-formula="x^2 + 2*x + 1 = 0">Andragradsekvation</button>
-                    <button class="example-btn" data-formula="f(x) = sqrt(x^2 + 1)">Kvadratrotsfunktion</button>
-                    <button class="example-btn" data-formula="lim_{x -> infinity} (1 + 1/x)^x = e">Gränsvärde</button>
-                    <button class="example-btn" data-formula="sum_{i=1}^{n} i = n(n+1)/2">Summaformel</button>
-                    <button class="example-btn" data-formula="integral_{0}^{1} x^2 dx = 1/3">Integral</button>
+                    <button class="example-btn" data-formula="x + 7 = 15">Enkel ekvation</button>
+                    <button class="example-btn" data-formula="(1)/(2) + (1)/(4) = (3)/(4)">Bråkaddition</button>
+                    <button class="example-btn" data-formula="25/100 * 200 = 50">Procent</button>
+                    <button class="example-btn" data-formula="A = l * w">Rektangelarea</button>
+                    <button class="example-btn" data-formula="a^2 + b^2 = c^2">Pythagoras sats</button>
+                    <button class="example-btn" data-formula="sqrt(144) = 12">Kvadratrot</button>
+                    <button class="example-btn" data-formula="y = 2*x + 3">Linjär funktion</button>
                     <button class="example-btn" data-formula="A = pi * r^2">Cirkelarea</button>
+                    <button class="example-btn" data-formula="x^2 - 9 = 0">Andragradsekvation</button>
+                    <button class="example-btn" data-formula="V = (4)/(3) * pi * r^3">Sfärvolym</button>
+                    <button class="example-btn" data-formula="3.5 * 10^4">Potensform</button>
+                    <button class="example-btn" data-formula="sin(30) = (1)/(2)">Trigonometri</button>
                 </div>
             </div>
         </main>

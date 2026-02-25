@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 360">
+  <defs>
+    <filter id="sketchy" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.032" numOctaves="3" seed="11" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <!-- Floating math symbols behind bear -->
+  <g font-family="'Times New Roman', Georgia, serif" fill="#1a1a1a" opacity="0.38">
+    <text x="12"  y="102" font-size="26" transform="rotate(-9,12,102)">∫</text>
+    <text x="262" y="90"  font-size="21" transform="rotate(6,262,90)">π</text>
+    <text x="8"   y="172" font-size="18" transform="rotate(-6,8,172)">Σ</text>
+    <text x="268" y="168" font-size="16" transform="rotate(7,268,168)">√x</text>
+    <text x="16"  y="282" font-size="15" transform="rotate(-5,16,282)">α²</text>
+    <text x="264" y="280" font-size="17" transform="rotate(5,264,280)">∞</text>
+  </g>
+
+  <g filter="url(#sketchy)" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Feet (drawn first so body covers their tops) -->
+    <ellipse cx="114" cy="322" rx="36" ry="22" fill="white" stroke-width="2.4"/>
+    <ellipse cx="186" cy="322" rx="36" ry="22" fill="white" stroke-width="2.4"/>
+    <!-- Toe marks -->
+    <line x1="98"  y1="313" x2="98"  y2="324" stroke-width="1.6"/>
+    <line x1="113" y1="311" x2="113" y2="324" stroke-width="1.6"/>
+    <line x1="128" y1="313" x2="128" y2="324" stroke-width="1.6"/>
+    <line x1="170" y1="313" x2="170" y2="324" stroke-width="1.6"/>
+    <line x1="185" y1="311" x2="185" y2="324" stroke-width="1.6"/>
+    <line x1="200" y1="313" x2="200" y2="324" stroke-width="1.6"/>
+
+    <!-- Body -->
+    <ellipse cx="150" cy="252" rx="71" ry="64" fill="white" stroke-width="2.8"/>
+    <!-- Tummy patch -->
+    <ellipse cx="150" cy="258" rx="41" ry="37" fill="#faf5f0" stroke-width="1.6"/>
+
+    <!-- Left arm (thick outline tube: dark outer + white inner) -->
+    <path d="M 86,240 C 73,231 64,222 59,214" fill="none" stroke="#1a1a1a" stroke-width="19" stroke-linecap="round"/>
+    <path d="M 86,240 C 73,231 64,222 59,214" fill="none" stroke="white"   stroke-width="13" stroke-linecap="round"/>
+    <!-- Right arm -->
+    <path d="M 214,240 C 227,231 236,222 241,214" fill="none" stroke="#1a1a1a" stroke-width="19" stroke-linecap="round"/>
+    <path d="M 214,240 C 227,231 236,222 241,214" fill="none" stroke="white"   stroke-width="13" stroke-linecap="round"/>
+
+    <!-- Ruler (on top of arms) -->
+    <rect x="50" y="204" width="200" height="26" rx="3" fill="#fffef0" stroke-width="2.2"/>
+    <!-- Major ticks every 40px -->
+    <line x1="70"  y1="204" x2="70"  y2="219" stroke-width="1.6"/>
+    <line x1="110" y1="204" x2="110" y2="215" stroke-width="1.4"/>
+    <line x1="130" y1="204" x2="130" y2="219" stroke-width="1.6"/>
+    <line x1="150" y1="204" x2="150" y2="215" stroke-width="1.4"/>
+    <line x1="170" y1="204" x2="170" y2="219" stroke-width="1.6"/>
+    <line x1="190" y1="204" x2="190" y2="215" stroke-width="1.4"/>
+    <line x1="210" y1="204" x2="210" y2="219" stroke-width="1.6"/>
+    <line x1="230" y1="204" x2="230" y2="215" stroke-width="1.4"/>
+    <!-- Ruler numbers -->
+    <text x="70"  y="228" text-anchor="middle" font-size="8" font-family="monospace" fill="#555" stroke="none">1</text>
+    <text x="130" y="228" text-anchor="middle" font-size="8" font-family="monospace" fill="#555" stroke="none">2</text>
+    <text x="170" y="228" text-anchor="middle" font-size="8" font-family="monospace" fill="#555" stroke="none">3</text>
+    <text x="210" y="228" text-anchor="middle" font-size="8" font-family="monospace" fill="#555" stroke="none">4</text>
+
+    <!-- Ears (drawn before head so head covers their bases) -->
+    <circle cx="96"  cy="72" r="28" fill="white" stroke-width="2.5"/>
+    <circle cx="204" cy="72" r="28" fill="white" stroke-width="2.5"/>
+    <!-- Inner ear -->
+    <circle cx="96"  cy="72" r="17" fill="#fde0d0" stroke-width="1.6"/>
+    <circle cx="204" cy="72" r="17" fill="#fde0d0" stroke-width="1.6"/>
+
+    <!-- Head -->
+    <circle cx="150" cy="130" r="64" fill="white" stroke-width="2.8"/>
+
+    <!-- Snout -->
+    <ellipse cx="150" cy="148" rx="29" ry="21" fill="#fde8d8" stroke-width="1.9"/>
+
+    <!-- Nose -->
+    <ellipse cx="150" cy="138" rx="12" ry="8.5" fill="#222" stroke="none"/>
+    <!-- Nose shine -->
+    <ellipse cx="145" cy="134" rx="4.5" ry="3" fill="white" stroke="none" opacity="0.55"/>
+
+    <!-- Eyes -->
+    <circle cx="127" cy="114" r="11" fill="#1a1a1a" stroke="none"/>
+    <circle cx="173" cy="114" r="11" fill="#1a1a1a" stroke="none"/>
+    <!-- Eye shines -->
+    <circle cx="122" cy="109" r="4"   fill="white" stroke="none"/>
+    <circle cx="168" cy="109" r="4"   fill="white" stroke="none"/>
+
+    <!-- Eyebrows (slight arch) -->
+    <path d="M 116,101 Q 127,95 139,100" fill="none" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M 161,100 Q 173,95 184,101" fill="none" stroke-width="2.6" stroke-linecap="round"/>
+
+    <!-- Mouth -->
+    <path d="M 138,157 Q 150,169 162,157" fill="none" stroke-width="2.3"/>
+
+    <!-- Cheek blush (subtle circles) -->
+    <circle cx="113" cy="140" r="13" fill="#f0c0b0" stroke="none" opacity="0.35"/>
+    <circle cx="187" cy="140" r="13" fill="#f0c0b0" stroke="none" opacity="0.35"/>
+
+  </g>
+</svg>
