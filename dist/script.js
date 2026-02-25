@@ -5,8 +5,11 @@ class Math2Pic {
         this.downloadBtn  = document.getElementById('downloadBtn');
         this.downloadJpgBtn = document.getElementById('downloadJpgBtn');
         this.copyBtn      = document.getElementById('copyBtn');
+        this.transparentBg = document.getElementById('transparentBg');
         this.exampleBtns  = document.querySelectorAll('.example-btn');
+        this.sizeBtns     = document.querySelectorAll('.size-btn');
         this.symbolBtns   = document.querySelectorAll('.symbol-btn');
+        this.imageScale   = 1.5; // default: medium
 
         this.initEventListeners();
     }
@@ -15,6 +18,15 @@ class Math2Pic {
         this.downloadBtn.addEventListener('click', () => this.downloadImage('png'));
         this.downloadJpgBtn.addEventListener('click', () => this.downloadImage('jpg'));
         this.copyBtn.addEventListener('click', () => this.copyToClipboard());
+
+        // Size selector
+        this.sizeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.sizeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                this.imageScale = parseFloat(btn.dataset.scale);
+            });
+        });
 
         // Symbol insert buttons
         this.symbolBtns.forEach(btn => {
@@ -132,16 +144,17 @@ class Math2Pic {
     }
 
     convertSVGToCanvas(svgElement, format) {
+        const transparent = format === 'png' && this.transparentBg.checked;
         try {
-            const standalone = this.buildStandaloneSVG(svgElement, 20);
-            this.rasterizeStandaloneSVG(standalone, format, 2);
+            const standalone = this.buildStandaloneSVG(svgElement, 20, transparent);
+            this.rasterizeStandaloneSVG(standalone, format, this.imageScale, transparent);
         } catch (e) {
             console.error('SVG conversion failed:', e);
             this.fallbackTextDownload(format);
         }
     }
 
-    buildStandaloneSVG(svgElement, padding = 20) {
+    buildStandaloneSVG(svgElement, padding = 20, transparent = false) {
         const clone = svgElement.cloneNode(true);
         clone.removeAttribute('style');
         let bbox;
@@ -169,13 +182,13 @@ class Math2Pic {
             '<?xml version="1.0" encoding="UTF-8"?>',
             `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">`,
             defsBlock,
-            '<rect width="100%" height="100%" fill="white"/>',
+            transparent ? '' : '<rect width="100%" height="100%" fill="white"/>',
             `<g transform="translate(${translateX}, ${translateY})">${children}</g>`,
             '</svg>'
         ].join('');
     }
 
-    rasterizeStandaloneSVG(svgString, format, scale = 2) {
+    rasterizeStandaloneSVG(svgString, format, scale = 2, transparent = false) {
         const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
         const url  = URL.createObjectURL(blob);
         const img  = new Image();
@@ -185,8 +198,10 @@ class Math2Pic {
             canvas.width  = imgEl.width  * scale;
             canvas.height = imgEl.height * scale;
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            if (!transparent) {
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
             ctx.setTransform(scale, 0, 0, scale, 0, 0);
             ctx.drawImage(imgEl, 0, 0);
             if (cleanup) cleanup();

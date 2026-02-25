@@ -95,17 +95,30 @@
                     </div>
                 </details>
 
-                <div class="controls">
-                    <button id="downloadBtn" disabled>Ladda ner som PNG</button>
-                    <button id="downloadJpgBtn" disabled>Ladda ner som JPG</button>
-                    <button id="copyBtn" disabled>Kopiera till urklipp som text*</button>
-                    <span class="copy-footnote">*vissa tecken kan inte kopieras som text, t.ex. bråk</span>
-                </div>
             </div>
             <div class="preview-section panel-paper">
                 <h2>Förhandsvisning</h2>
                 <div id="mathPreview" class="math-preview">
                     Din ekvation kommer att visas här...
+                </div>
+                <div class="controls">
+                    <div class="controls-row">
+                        <span class="size-label">Storlek:</span>
+                        <div class="size-selector">
+                            <button class="size-btn" data-scale="0.7">Liten</button>
+                            <button class="size-btn active" data-scale="1.5">Medium</button>
+                            <button class="size-btn" data-scale="2.5">Stor</button>
+                        </div>
+                    </div>
+                    <div class="controls-row">
+                        <button id="downloadBtn" disabled>Ladda ner som PNG</button>
+                        <label class="transparent-label"><input type="checkbox" id="transparentBg"> Transparent bakgrund</label>
+                        <button id="downloadJpgBtn" disabled>Ladda ner som JPG</button>
+                    </div>
+                    <div class="controls-row">
+                        <button id="copyBtn" disabled>Kopiera till urklipp som text*</button>
+                        <span class="copy-footnote">*vissa tecken kan inte kopieras som text, t.ex. bråk</span>
+                    </div>
                 </div>
             </div>
             <div class="syntax-help panel-paper">
